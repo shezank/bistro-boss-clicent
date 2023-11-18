@@ -11,6 +11,9 @@ import Loign from '../../Pages/Login/Loign';
 import Register from '../../Pages/Register/Register';
 import BuyNow from '../../Pages/BuyNow/BuyNow';
 import PrivateRoute from '../../Shard/PrivateRoute/PrivateRoute';
+import Dashboard from '../../Pages/Dashboard/Dashboard';
+import MyCart from '../../Pages/Dashboard/MyCart/MyCart';
+import AllUsers from '../../Pages/Dashboard/Admin/AllUsers/AllUsers';
 
 const Routers = createBrowserRouter([
     {
@@ -43,6 +46,20 @@ const Routers = createBrowserRouter([
         },
       ]
     },
+    {
+      path: '/Dashboard', 
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      children:[
+        {
+          path: 'mycart',
+          element: <MyCart></MyCart>
+        },
+        {
+          path: 'allusers',
+          element: <AllUsers></AllUsers>
+        },
+      ]
+    }
   ]);
 
 export default Routers;

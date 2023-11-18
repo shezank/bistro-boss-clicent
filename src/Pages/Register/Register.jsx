@@ -1,15 +1,19 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import { AuthContext } from '../../Shard/AuthProvider/AuthProvider';
 import { updateProfile } from 'firebase/auth';
+import useAxiosPublic from '../../Hooks/useAxiosPublic/useAxiosPublic';
+import SocialAuth from '../../Shard/SocialAuth/SocialAuth';
 
 
 
 const Register = () => {
-
-    const {createUser} = useContext(AuthContext)
+    const axiosPublice = useAxiosPublic()
+    const { createUser } = useContext(AuthContext)
     const navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
     const {
         register,
         handleSubmit,
@@ -17,21 +21,30 @@ const Register = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        
+
         console.log(data)
         createUser(data.email, data.password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user)
-            updateProfile(user, {
-                displayName: data.name, photoURL: data.photourl
-              }).then(() => {
-                swal("Good job!", "You Successfully Register Your Account!", "success");
-                navigate('/')
-              }).catch((error) => {
-                console.error(error)
-              });
-        })
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                updateProfile(user, {
+                    displayName: data.name, photoURL: data.photourl
+                }).then(() => {
+                    const user = {
+                        name: data.name,
+                        email: data.email
+                    }
+                    axiosPublice.post('users', user)
+                        .then(res => {
+                            if (res.data) {
+                                swal("Good job!", "You Successfully Register Your Account!", "success");
+                                navigate(from, { replace: true });
+                            }
+                        })
+                }).catch((error) => {
+                    console.error(error)
+                });
+            })
     }
 
 
@@ -49,10 +62,11 @@ const Register = () => {
                                 <span className="label-text">User Name</span>
                             </label>
                             <input type="text" name='name'
-                                {...register("name", { 
-                                    required: true, 
+                                {...register("name", {
+                                    required: true,
                                     minLength: 4,
-                                    maxLength: 20 })}
+                                    maxLength: 20
+                                })}
 
                                 placeholder="Your Name" className="input input-bordered" />
                             {errors.name?.type === 'required' && <span className='text-red-500'>name is required</span>}
@@ -64,13 +78,13 @@ const Register = () => {
                                 <span className="label-text">Photo URL</span>
                             </label>
                             <input type="text" name='name'
-                                {...register("photourl", { 
-                                    required: true, 
-                                    })}
+                                {...register("photourl", {
+                                    required: true,
+                                })}
 
                                 placeholder="Your Photo URL" className="input input-bordered" />
                             {errors.photourl?.type === 'required' && <span className='text-red-500'>Photo URL is required</span>}
-                            
+
 
                         </div>
                         <div className="form-control">
@@ -87,11 +101,11 @@ const Register = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name='password'
-                                {...register("password", { 
+                                {...register("password", {
                                     required: true,
-                                    pattern: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/ 
-                                 })}
-                                placeholder="password" className="input input-bordered"/>
+                                    pattern: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/
+                                })}
+                                placeholder="password" className="input input-bordered" />
                             {errors.password?.type === 'pattern' && <span className='text-red-500'>Password must contain one digit from 1 to 9, one lowercase letter, one uppercase letter, one special character, no space, and it must be 8-16 characters long.</span>}
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
@@ -103,6 +117,8 @@ const Register = () => {
                         </div>
                     </form>
                     <p><small>Already Have A Account?  </small><Link to={'/login'}>Login</Link></p>
+                    <div className="divider"></div> 
+                    <SocialAuth></SocialAuth>
                 </div>
             </div>
         </div>

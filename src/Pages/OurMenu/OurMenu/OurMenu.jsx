@@ -30,7 +30,7 @@ const OurMenu = () => {
             ></SectionTitle>
             
             
-            <MenuCatagory title={'offered'} items={offered}></MenuCatagory>
+            <MenuCatagory title={'ofnpm rfered'} items={offered}></MenuCatagory>
 
             <Cover title={'dessert'} img={dessertImg}></Cover>
             <MenuCatagory title={'dessert'}  items={dessert}></MenuCatagory>

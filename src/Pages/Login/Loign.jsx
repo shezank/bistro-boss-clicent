@@ -3,6 +3,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { AuthContext } from '../../Shard/AuthProvider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
+import SocialAuth from '../../Shard/SocialAuth/SocialAuth';
 
 const Loign = () => {
 
@@ -87,6 +88,8 @@ const Loign = () => {
                         </div>
                     </form>
                     <p><small>New here?  </small><Link to={'/register'}>Create a New Account</Link></p>
+                    <div className="divider"></div> 
+                    <SocialAuth></SocialAuth>
                 </div>
             </div>
         </div>
