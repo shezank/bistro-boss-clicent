@@ -13,7 +13,7 @@ const Navbar = () => {
         <NavLink to={'/ourmenu'}><li><button>Our Menu</button></li></NavLink>
         <NavLink to={'/ourshop/salad'}><li><button>Our Shop</button></li></NavLink>
         <NavLink to={'/buynow'}><li><button>Buy Now</button></li></NavLink>
-        <NavLink to={'/Dashboard/mycart'}><li><button>
+        <NavLink to={'/dashboard/mycart'}><li><button>
             <FaShoppingCart />
             <div className="badge badge-secondary">+{cart.length}</div>
         </button></li></NavLink>

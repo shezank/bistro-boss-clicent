@@ -1,11 +1,12 @@
 import React from 'react';
-import { FaBookOpen, FaCartArrowDown, FaHome, FaIceCream, FaList, FaRProject, FaStreetView, FaUser } from 'react-icons/fa';
+import { FaBookOpen, FaCartArrowDown, FaHome, FaIceCream, FaList, FaRProject, FaStreetView, FaUser, FaWallet } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 import useCart from '../../Hooks/useCart/useCart';
+import useAdmin from '../../Hooks/useAdmin/useAdmin';
 
 const Dashboard = () => {
     const [cart] = useCart();
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className='flex'>
             <div className='w-72 min-h-screen bg-orange-500'>
@@ -15,7 +16,7 @@ const Dashboard = () => {
                         <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/adminhome'> <FaHome></FaHome> Admin Home </NavLink></li>
                         <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/allusers'> <FaUser></FaUser> All Users</NavLink></li>
                         <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/additems'> <FaIceCream></FaIceCream> Add Items</NavLink></li>
-                        <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/mybooking'> <FaList></FaList> Manage Items</NavLink></li>
+                        <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/manageitems'> <FaList></FaList> Manage Items</NavLink></li>
                         <hr />
                         <li className='bg-slate-100 text-xl font-bold'><NavLink to='/'> <FaHome></FaHome> Home</NavLink></li>
                         <li className='bg-slate-100 text-xl font-bold'><NavLink to='/ourshop/salad'> <FaList></FaList> Menu</NavLink></li>
@@ -24,6 +25,7 @@ const Dashboard = () => {
                             <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/mycart'> <FaCartArrowDown></FaCartArrowDown> My Cart {cart.length} </NavLink></li>
                             <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/addreview'> <FaStreetView></FaStreetView> Add Review</NavLink></li>
                             <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/mybooking'> <FaBookOpen></FaBookOpen> My Booking</NavLink></li>
+                            <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/paymentsHistory'> <FaWallet></FaWallet> Payments History</NavLink></li>
                             <li className='bg-slate-100 text-xl font-bold'><NavLink to='/dashboard/reservation'> <FaRProject></FaRProject> Reservation</NavLink></li>
                             <hr />
                             <li className='bg-slate-100 text-xl font-bold'><NavLink to='/'> <FaHome></FaHome> Home</NavLink></li>
