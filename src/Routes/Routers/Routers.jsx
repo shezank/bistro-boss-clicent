@@ -19,6 +19,8 @@ import AdminRoute from '../../Shard/AdminRoute/AdminRoute';
 import ManageItems from '../../Pages/Dashboard/ManageItems/ManageItems';
 import Payments from '../../Pages/Dashboard/Payments/Payments';
 import PaymentsHistory from '../../Pages/Dashboard/PaymentsHistory/PaymentsHistory';
+import UserHome from '../../Pages/Dashboard/UserHome/UserHome';
+import AdminHome from '../../Pages/Dashboard/AdminHome/AdminHome';
 
 const Routers = createBrowserRouter([
     {
@@ -60,12 +62,20 @@ const Routers = createBrowserRouter([
           element: <MyCart></MyCart>
         },
         {
+          path: 'userHome',
+          element: <UserHome></UserHome>
+        },
+        {
           path: 'payments',
           element: <Payments></Payments>
         },
         {
           path: 'paymentsHistory',
           element: <PaymentsHistory></PaymentsHistory>
+        },
+        {
+          path: 'adminHome',
+          element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
         },
         {
           path: 'additems',

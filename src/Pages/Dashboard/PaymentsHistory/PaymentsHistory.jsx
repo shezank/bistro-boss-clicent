@@ -19,7 +19,7 @@ const PaymentsHistory = () => {
 
     return (
         <div className='m-10'>
-            <h1 className='text-3xl font-bold'>Total Payments:{payments.length} </h1>
+            <h1 className='text-3xl font-bold'>Total Payments:{payments?.length} </h1>
 
             <div className='m-10'>
                 <div className="overflow-x-auto">
